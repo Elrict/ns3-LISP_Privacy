@@ -1,43 +1,11 @@
-#include "ns3/core-module.h"
-#include "ns3/network-module.h"
-#include "ns3/internet-module.h"
-#include "ns3/point-to-point-module.h"
-#include "ns3/applications-module.h"
-#include "ns3/netanim-module.h"
-#include "ns3/addressless-module.h"
-#include "ns3/flow-monitor-helper.h"
+#include "addressless.h"
 using json = nlohmann::json;
 
 using namespace ns3;
-enum simu
-{
-  IP = 1,
-  IPNAT = 7,
-  LISPNAIVE = 2,
-  LISPEID = 3,
-  LISPRLOC = 4,
-  LISPFAST = 5,
-  LISPPASSIVE = 6,
-  LISPNATv2 = 8,
-  LISPBI = 9,
-  IPVANILLA = 10,
-  LISPVANILLA = 11
-
-};
-std::map<std::string, uint8_t> mapInput = {
-    {"IPBASE", IP},
-    {"IPVANILLA", IPVANILLA},
-    {"LISPVANILLA", LISPVANILLA},
-    {"IPNAT", IPNAT},
-    {"LISPNAIVE", LISPNAIVE},
-    {"LISPEID", LISPEID},
-    {"LISPRLOC", LISPRLOC},
-    {"LISPFAST", LISPFAST},
-    {"LISPPASSIVE", LISPPASSIVE},
-    {"LISPBI", LISPBI}};
 
 NS_LOG_COMPONENT_DEFINE("Addressless");
 
+// Function used to parse user-provided arguments.
 std::vector<std::string> parseArgs(std::string input)
 {
   std::string delimiter = "-";
@@ -60,14 +28,19 @@ int main(int argc, char *argv[])
   std::string protocol;
   double delay = 0;
   int nbrClients = 1;
-  cmd.AddValue("SIMU", "IP topology with Entrance and Main modules.", simuChoice);
-  cmd.AddValue("Clients", "Number of clients", nbrClients);
+
+  // Defining user-supplied arguments
+  cmd.AddValue("SimulationType", "Define which Simulation to execute.", simuChoice);
+  cmd.AddValue("NbClients", "Number of clients", nbrClients);
   cmd.AddValue("Protocol", "Transport layer Protocol to be used: TCP or UDP", protocol);
   cmd.AddValue("ClientInterval", "Interval between subsequent clients connections", delay);
   cmd.Parse(argc, argv);
+
   Simulation simu;
   simu.m_nbrclients = nbrClients;
   simu.m_timeBtwClients = delay;
+
+  // Enabling metadata information
   PacketMetadata::Enable();
   Packet::EnablePrinting();
 
@@ -117,19 +90,16 @@ int main(int argc, char *argv[])
   Simulator::Run();
   Simulator::Destroy();
 
+  // After simulation ran, log results to files.
   std::ofstream out;
-
-  // std::ios::app is the open mode "append" meaning
-  // new data will be written to the end of the file.
   if (IPTopology::m_connectionTimes.size() < (size_t)nbrClients)
   {
-    std::cerr << " Not good: " << IPTopology::m_connectionTimes.size() << "<" << (size_t)nbrClients << std::endl;
+    std::cerr << "All the clients didn't manage to complete their connections. Clients done: " << IPTopology::m_connectionTimes.size() << "< Total clients:" << (size_t)nbrClients << std::endl;
   }
   else
   {
-
-    std::string filename = "plots/json/" + simuChoice + "_" + protocol + ".json";
-
+    // Saving json data to file
+    std::string filename = "results/json/" + simuChoice + "_" + protocol + ".json";
     json j;
     std::ifstream file(filename);
     file.ignore(std::numeric_limits<std::streamsize>::max());
@@ -144,7 +114,6 @@ int main(int argc, char *argv[])
     j[std::to_string((double)(simu.m_timeBtwClients * 1000))] = IPTopology::m_data;
     std::ofstream o(filename, std::ofstream::trunc);
     o << std::setw(1) << j << std::endl;
-
   }
 
   return 0;
