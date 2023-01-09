@@ -1,0 +1,65 @@
+## -*- Mode: python; py-indent-offset: 4; indent-tabs-mode: nil; coding: utf-8; -*-
+
+def build(bld):
+
+    module = bld.create_ns3_module('addressless', ['core'])
+
+    module.source = [
+            'simulations/simulation.cc',
+
+            'lisp/model/data-plane/lisp-over-ipv4-impl-redir.cc',
+            'lisp/model/control-plane/lisp-etr-itr-privacy-application.cc',
+            'lisp/model/control-plane/map-server-privacy-ddt.cc',
+            'lisp/helper/map-server-privacy-helper.cc',
+            'lisp/model/control-plane/map-resolver-privacy-ddt.cc',
+            'lisp/helper/map-resolver-privacy-helper.cc',
+
+            'lisp/helper/lisp-etr-itr-privacy-app-helper.cc',
+            'lisp/helper/lisp-privacy-helper.cc',
+            'applications/model/redirect-application-client.cc',
+            'applications/model/redirect-application-entrance.cc',
+            'applications/model/redirect-application-server.cc',
+            'applications/model/redirect-header.cc',
+            'applications/helper/redirect-application-helper.cc',
+            'topology/lisptopology.cc',
+            'topology/lispnode.cc',
+            'topology/ipnode.cc',
+            'topology/topology.cc',
+            'simulations/IP/ipbase.cc',
+            'simulations/Vanilla/ipvanilla.cc',
+            'simulations/Vanilla/lispvanilla.cc',
+            'simulations/IP/ipnat.cc',
+            'simulations/EIDPriv/lispeid.cc',
+            'simulations/EIDPriv/lispnaive.cc',
+            'simulations/RLOCPriv/lisprloc.cc',
+            'simulations/EIDPriv/lispfast.cc',
+            'simulations/EIDPriv/lispnat.cc',
+            'simulations/Complete/bidirec.cc'
+
+
+        ]
+
+    headers = bld(features='ns3header')
+    headers.module = 'addressless'
+    headers.source = [
+        'utils/json.hpp',
+        'lisp/model/control-plane/map-server-privacy-ddt.h',
+        'lisp/model/control-plane/map-resolver-privacy-ddt.h',
+        'lisp/helper/map-server-privacy-helper.h',
+        'lisp/helper/map-resolver-privacy-helper.h',
+        'lisp/model/data-plane/lisp-over-ipv4-impl-redir.h',
+        'lisp/model/control-plane/lisp-etr-itr-privacy-application.h',
+        'lisp/helper/lisp-etr-itr-privacy-app-helper.h',
+        'lisp/helper/lisp-privacy-helper.h',
+        
+        'simulations/simulation.hpp',
+        'applications/model/redirect-application-client.h',
+        'applications/model/redirect-application-entrance.h',
+        'applications/model/redirect-application-server.h',
+        'applications/model/redirect-header.h',
+        'applications/helper/redirect-application-helper.h',
+        'topology/topology.hpp',
+ 
+        
+        
+        ]

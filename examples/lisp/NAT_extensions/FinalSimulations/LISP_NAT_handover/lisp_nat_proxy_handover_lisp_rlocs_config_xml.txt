@@ -1,0 +1,27 @@
+<locators>
+<locator>
+<if-address-v4>	192.168.5.2	</if-address-v4>
+<entry>
+<eid-v4>	192.168.5.0	255.255.255.0	0	</eid-v4>
+<rloc-v4>	192.168.5.2	100	52	1	</rloc-v4>
+</entry>
+</locator>
+<locator>
+<if-address-v4>	192.168.6.2	</if-address-v4>
+<entry>
+<eid-v4>	192.168.6.0	255.255.255.0	0	</eid-v4>
+<rloc-v4>	192.168.6.2	100	52	1	</rloc-v4>
+</entry>
+</locator>
+<locator>
+<if-address-v4>	192.168.2.2	</if-address-v4>
+<entry>
+<eid-v4>	192.168.2.0	255.255.255.0	0	</eid-v4>
+<rloc-v4>	192.168.2.2	100	52	1	</rloc-v4>
+</entry>
+<entry>
+<eid-v4>	10.1.2.0	255.255.255.0	0	</eid-v4>
+<rloc-v4>	192.168.2.2	100	52	1	</rloc-v4>
+</entry>
+</locator>
+</locators>
