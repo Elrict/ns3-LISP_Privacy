@@ -12,10 +12,7 @@
  * In this simulation, A part of the LISP control plane is rewritten to
  *      - Send on a map reply a specific rloc computed by hashing.
  *      - check when decapsulating a packet that the rloc used is the right one.
- *
- * Questions:
- *      - 1 check for each packet??
- *
+
  * Code:
  *      - [lisp/control-plane/lisp-etr-itr-privacy-application]
  *

@@ -1,10 +1,3 @@
-/*
- * lisp-protocol.h
- *
- *  Created on: 28 janv. 2016
- *      Author: lionel
- */
-
 #ifndef LISP_OVER_IPV4_IMPL_REDIR_H_
 #define LISP_OVER_IPV4_IMPL_REDIR_H_
 
