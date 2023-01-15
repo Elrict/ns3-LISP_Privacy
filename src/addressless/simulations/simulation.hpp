@@ -127,7 +127,7 @@ namespace ns3
         bool m_fastRedir = false;
         bool m_rlocRedir = false;
         bool m_natting = false;
-        bool m_LISPNatting = false;
+        bool m_lispNatting = false;
 
         bool m_eidPriv = false;  // Make sure that only one eid priv technique is applied.
         bool m_rlocPriv = false; // Make sure that only one RLOC priv technique is applied.

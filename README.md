@@ -20,6 +20,7 @@ Then, we can clone the git repo and build the source code.
 ```
 git clone https://github.com/Elrict/ns-3_LISP_NAT.git 
 cd ns-3-lisp
+chmod 777 waf
 ./waf configure
 ./waf build
 
@@ -29,6 +30,11 @@ cd ns-3-lisp
 
 To run the simulations developed, the following command can be used
 ```
-./waf --run "Addressless --SimulationType=... --NbClients=... --Protocol=[TCP/UDP]  --ClientInterval=..." -j10
+./waf --run "addressless --SimulationType=... --NbClients=... --Protocol=[TCP/UDP]  --ClientInterval=..." -j10
 
 ```
+Use
+```
+./waf --run "addressless --help"
+```
+To get more details about each simulation parameter.

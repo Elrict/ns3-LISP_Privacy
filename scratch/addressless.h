@@ -6,6 +6,7 @@
 #include "ns3/netanim-module.h"
 #include "ns3/addressless-module.h"
 #include "ns3/flow-monitor-helper.h"
+
 enum simu
 {
   IP = 1,
@@ -19,8 +20,8 @@ enum simu
   LISPBI = 9,
   IPVANILLA = 10,
   LISPVANILLA = 11
-
 };
+
 std::map<std::string, uint8_t> mapInput = {
     {"IPBASE", IP},
     {"IPVANILLA", IPVANILLA},
@@ -31,4 +32,5 @@ std::map<std::string, uint8_t> mapInput = {
     {"LISPRLOC", LISPRLOC},
     {"LISPFAST", LISPFAST},
     {"LISPPASSIVE", LISPPASSIVE},
-    {"LISPBI", LISPBI}};
+    {"LISPBI", LISPBI}
+};
